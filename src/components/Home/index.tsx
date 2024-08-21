@@ -1,4 +1,6 @@
+import MainBanner from "@/assets/mainBanner.svg";
+
 const Home = () => {
-  return <></>;
+  return <MainBanner />;
 };
 export default Home;
