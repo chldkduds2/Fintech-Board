@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         margin: 0;
         font-family: pretendard;
-        //font-family: 'Noto Sans KR', sans-serif;    
+        background-color  : ${({ theme }) => theme.colors.white100};
     };
     button{
         display: flex;
