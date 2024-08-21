@@ -7,7 +7,7 @@ export const NavbarContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.white100};
-  border-bottom: 0.09rem solid lightgray; /* 헤더 전체에 하단 테두리 */
+  border-bottom: 0.09rem solid lightgray;
 `;
 
 export const NavbarContants = styled.div`
