@@ -37,8 +37,7 @@ export const NavbarItem = styled.div`
 
   a {
     text-decoration: none;
-    color: ${({ theme }) => theme.colors.primary};
-    font-size: ${({ theme }) => theme.fontSize};
+    color: ${({ theme }) => theme.colors.black900};
 
     &:hover {
       text-decoration: underline;

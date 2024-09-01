@@ -14,8 +14,7 @@ module.exports = {
         test: /\.(js|jsx|ts|tsx)$/,
         loader: "esbuild-loader", // JavaScript, TypeScript 파일 처리
         options: {
-          loader: "tsx",
-          target: "es2015",
+          target: "esnext",
         },
       },
       {
