@@ -25,6 +25,7 @@ const Home = () => {
           </S.SearchInputWrapper>
         </S.BannerContent>
       </S.BannerSection>
+
       <PostContainer searchTerm={searchTerm} />
     </S.HomeContainer>
   );
