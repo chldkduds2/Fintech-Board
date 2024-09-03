@@ -1,4 +1,4 @@
-import KaKaoAuth from "@/components/kaKaoAuth/index";
+import KaKaoAuth from "@/components/KaKaoAuth/index";
 
 const KaKaoAuthPage = () => {
   return <KaKaoAuth />;

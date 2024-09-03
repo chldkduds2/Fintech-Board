@@ -25,15 +25,15 @@ export const FormContainer = styled.form`
   padding: 1.25rem;
   border-radius: 0.75rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.white100};
 `;
 
 export const InputLabel = styled.label`
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
-  font-size: 1rem;
-  color: #333;
+  font-size: 1.1rem;
+  color: ${({ theme }) => theme.colors.black900};
 `;
 
 export const TextInput = styled.input`

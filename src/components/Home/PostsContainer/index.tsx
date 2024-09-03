@@ -14,11 +14,11 @@ const PostContainer = ({ searchTerm }: PostContainerProps) => {
     totalPages,
     handlePageChange,
     currentPage,
-  } = usePagination<Post>(6);
+  } = usePagination<Post>(6, searchTerm);
 
   const { sortedPosts, sortOption, setSortOption } = usePostSorting(
     currentPosts,
-    searchTerm
+    searchTerm,
   );
 
   return (
@@ -40,32 +40,40 @@ const PostContainer = ({ searchTerm }: PostContainerProps) => {
           </S.SortButton>
         </S.SortControls>
       </S.PostsHeader>
-      <S.PostsGrid>
-        {sortedPosts.map((post) => {
-          const formattedDate = post.date.slice(0, 10);
-          const rating = Number(post.rating);
-          const starRating = "★".repeat(Math.round(rating));
-          return (
-            <S.PostCard key={post.id}>
-              <Link to={`/post/${post.id}`}>
-                <S.PostImage
-                  src={`http://localhost:8080/uploads/${post.image}`}
-                  alt={post.title}
-                />
-                <S.PostMeta>{`${post.author} 님 - ${formattedDate}`}</S.PostMeta>
-                <S.PostTitle>{post.title}</S.PostTitle>
-                <S.PostContent>{post.content}</S.PostContent>
-                <S.PostFooter>
-                  <S.PostHashtags>{post.hashtags.join(" ")}</S.PostHashtags>
-                  <S.PostRating>
-                    <S.StarIcon>{starRating}</S.StarIcon> {rating.toFixed(1)}
-                  </S.PostRating>
-                </S.PostFooter>
-              </Link>
-            </S.PostCard>
-          );
-        })}
-      </S.PostsGrid>
+
+      {sortedPosts.length === 0 ? (
+        <S.CenteredPostList>
+          <S.NoPosts>업로드된 게시물이 없습니다.</S.NoPosts>
+        </S.CenteredPostList>
+      ) : (
+        <S.PostsGrid>
+          {sortedPosts.map((post) => {
+            const formattedDate = post.date.slice(0, 10);
+            const rating = Number(post.rating);
+            const starRating = "★".repeat(Math.round(rating));
+            return (
+              <S.PostCard key={post.id}>
+                <Link to={`/post/${post.id}`}>
+                  <S.PostImage
+                    src={`http://localhost:8080/uploads/${post.image}`}
+                    alt={post.title}
+                  />
+                  <S.PostMeta>{`${post.author} 님 - ${formattedDate}`}</S.PostMeta>
+                  <S.PostTitle>{post.title}</S.PostTitle>
+                  <S.PostContent>{post.content}</S.PostContent>
+                  <S.PostFooter>
+                    <S.PostHashtags>{post.hashtags.join(" ")}</S.PostHashtags>
+                    <S.PostRating>
+                      <S.StarIcon>{starRating}</S.StarIcon> {rating.toFixed(1)}
+                    </S.PostRating>
+                  </S.PostFooter>
+                </Link>
+              </S.PostCard>
+            );
+          })}
+        </S.PostsGrid>
+      )}
+
       <S.Pagination>
         {[...Array(totalPages).keys()].map((pageNumber) => (
           <S.PaginationButton

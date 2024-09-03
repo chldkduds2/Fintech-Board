@@ -43,7 +43,7 @@ export const NavbarItem = styled.div`
       text-decoration: underline;
       text-decoration-color: ${({ theme }) => theme.colors.blue500};
       text-decoration-thickness: 0.2rem;
-      text-underline-offset: 1.25rem;
+      text-underline-offset: 1.30rem;
       font-weight: 700;
       color: ${({ theme }) => theme.colors.blue500};
     }

@@ -14,7 +14,7 @@ const NavBarItems = [
   },
   {
     href: "/register",
-    content: "내리뷰작성",
+    content: "내 리뷰작성",
     isContent: true,
     requiresAuth: true,
   },

@@ -10,11 +10,15 @@ const MyInfo = () => {
 
   const handleDelete = async (postId: number) => {
     if (window.confirm("정말로 이 게시물을 삭제하시겠습니까?")) {
-      await deletePost(postId);
+      try {
+        await deletePost(postId);
+      } catch (err) {
+        console.error("Failed to delete post:", err);
+      }
     }
   };
 
-  if (loading)
+  if (loading) {
     return (
       <S.PageContainer>
         <S.UserInfo>
@@ -42,19 +46,24 @@ const MyInfo = () => {
         </S.PostList>
       </S.PageContainer>
     );
+  }
 
-  if (error) return <S.Error>{error}</S.Error>;
+  if (error) {
+    return <S.Error>{error}</S.Error>;
+  }
 
   return (
     <S.PageContainer>
       <S.UserInfo>
         <S.UserName>💼 {userNickname} 님의 활동</S.UserName>
       </S.UserInfo>
-      <S.PostList>
-        {posts.length === 0 ? (
+      {posts.length === 0 ? (
+        <S.CenteredPostList>
           <S.NoPosts>작성한 게시물이 없습니다.</S.NoPosts>
-        ) : (
-          posts.map((post) => {
+        </S.CenteredPostList>
+      ) : (
+        <S.PostList>
+          {posts.map((post) => {
             const rating = Number(post.rating);
             const starRating = "★".repeat(Math.round(rating));
             return (
@@ -91,9 +100,9 @@ const MyInfo = () => {
                 </S.PostFooter>
               </S.PostItem>
             );
-          })
-        )}
-      </S.PostList>
+          })}
+        </S.PostList>
+      )}
     </S.PageContainer>
   );
 };

@@ -155,3 +155,22 @@ export const PaginationButton = styled.button`
     color: #fff;
   }
 `;
+
+export const CenteredPostList = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: ${({ theme }) => theme.colors.white100};
+  border-radius: 0.8rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+`;
+
+
+export const NoPosts = styled.p`
+  font-size: 1.2rem;
+  color: ${({ theme }) => theme.colors.gray};
+  text-align: center;
+  margin-top: 2rem;
+  padding: 8.5rem;
+`;

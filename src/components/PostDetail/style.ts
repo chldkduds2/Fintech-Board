@@ -4,21 +4,18 @@ export const PageContainer = styled.div`
   padding: 20px;
   max-width: 900px;
   margin: 4rem auto 4rem auto;
-
-  background: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
 `;
 
 export const Title = styled.h1`
   margin-bottom: 10px;
-  border-bottom: 2px solid #e0e0e0;
   padding-bottom: 10px;
 
   font-size: 2.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: ${({ theme }) => theme.colors.black900};
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const Author = styled.p`
@@ -31,7 +28,7 @@ export const Author = styled.p`
 
 export const Date = styled.p`
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 2.5rem;
   font-weight: 400;
   font-size: 1rem;
   color: ${({ theme }) => theme.colors.gray800};

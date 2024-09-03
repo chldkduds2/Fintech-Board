@@ -8,7 +8,7 @@ const FindaBoardLayout = ({ children }: PropsWithChildren) => {
     <>
       <Navbar />
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

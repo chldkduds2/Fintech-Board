@@ -5,7 +5,7 @@ export const PageContainer = styled.div`
   flex-direction: column;
   margin: 4rem auto;
   margin-bottom: 13.8rem;
-  width: 90%;
+  width: 100%;
   max-width: 1200px;
   padding: 2rem;
   background-color: ${({ theme }) => theme.colors.white100};
@@ -33,6 +33,13 @@ export const PostList = styled.ul`
   gap: 2rem;
 `;
 
+export const CenteredPostList = styled(PostList)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
+
 export const PostItem = styled.li`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 1.5rem;
@@ -54,9 +61,10 @@ export const PostItem = styled.li`
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   }
 `;
+
 export const PostImage = styled.img`
   width: 100%;
-  height: auto;
+  height: 13rem;
   border-radius: 0.6rem;
   margin-bottom: 1rem;
 `;
@@ -68,6 +76,7 @@ export const PostTitle = styled.h2`
   margin: 0.5rem 0;
   flex: 1;
 `;
+
 export const PostContent = styled.p`
   font-size: 1rem;
   color: ${({ theme }) => theme.colors.gray700};
@@ -147,6 +156,7 @@ export const NoPosts = styled.p`
   text-align: center;
   margin-top: 2rem;
   padding: 8.5rem;
+
 `;
 
 export const Loading = styled.div`
