@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useKakaoAuth from "@/hooks/kaKaoAuth/useKaKaoAuth";
-import FindaLogoImg from "@/assets/FindaLogo.svg";
+import FindaLogoImg from "@/assets/findaLogoImg.svg";
 import * as S from "./style";
 
 const NavBarItems = [

@@ -3,22 +3,22 @@ import styled from "styled-components";
 export const PostsLayout = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 3rem auto;
+  margin: 4rem auto;
   width: 90%;
   max-width: 75rem;
 `;
 
 export const PostsTitle = styled.h2`
   color: ${({ theme }) => theme.colors.black900};
-  font-size: 2rem;
+  font-size: 2.1rem;
   font-weight: 700;
-  margin-bottom: 2rem;
+  margin-bottom: 0.8rem;
   text-align: left;
 `;
 
 export const PostsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, minmax(17.5rem, 1fr));
+  grid-template-columns: repeat(3, minmax(17.5vw, 1fr));
   gap: 2rem;
 `;
 
@@ -79,7 +79,7 @@ export const PostCard = styled.div`
 
 export const PostImage = styled.img`
   width: 100%;
-  height: auto;
+  height: 13rem;
   border-radius: 0.6rem;
   margin-bottom: 1rem;
 `;
@@ -91,16 +91,17 @@ export const PostMeta = styled.div`
 `;
 
 export const PostTitle = styled.h3`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
   color: ${({ theme }) => theme.colors.black900};
-  margin: 0.5rem 0;
+  margin: 0.5rem 0 0.5rem 0;
 `;
 
 export const PostContent = styled.p`
   font-size: 1rem;
   color: ${({ theme }) => theme.colors.gray700};
   flex-grow: 1;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
