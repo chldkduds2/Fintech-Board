@@ -64,28 +64,6 @@ const NavBar = () => {
       </React.Fragment>
     ));
 
-  if (loading) {
-    return (
-      <S.NavbarContainer>
-        <S.NavbarContants>
-          <S.NavbarLeft>
-            <Link to={"/"}>
-              <FindaLogoImg />
-            </Link>
-            <S.NavbarItem>
-              <Link to={"/"}>홈</Link>
-            </S.NavbarItem>
-          </S.NavbarLeft>
-
-          <S.NavbarRight>
-            <Skeleton width={100} height={24} />
-            <Skeleton width={100} height={24} style={{ marginLeft: "1rem" }} />
-          </S.NavbarRight>
-        </S.NavbarContants>
-      </S.NavbarContainer>
-    );
-  }
-
   return (
     <S.NavbarContainer>
       <S.NavbarContants>
@@ -101,8 +79,8 @@ const NavBar = () => {
 
         <S.NavbarRight>
           {userNickname ? (
-            <Link to={"/myInfo"}>
-              <S.NavbarItem>{userNickname} 님</S.NavbarItem>
+            <Link to={"/"}>
+            <S.NavbarItem>{userNickname} 님</S.NavbarItem>
             </Link>
           ) : (
             renderItems(

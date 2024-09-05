@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface SubmitButtonProps {
+  $isFormValid: boolean;
+}
+
 export const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -71,7 +75,7 @@ export const FileInput = styled.input`
   font-size: 1rem;
 `;
 
-export const SubmitButton = styled.button<{ isFormValid: boolean }>`
+export const SubmitButton = styled.button<SubmitButtonProps>`
   display: flex;
   float: right;
   justify-content: center;
@@ -80,10 +84,10 @@ export const SubmitButton = styled.button<{ isFormValid: boolean }>`
   border: none;
   border-radius: 0.5rem;
   font-size: 1rem;
-  cursor: ${({ isFormValid }) => (isFormValid ? "pointer" : "not-allowed")};
-  background-color: ${({ theme, isFormValid }) =>
-    isFormValid ? theme.colors.blue500 : "#ddd"};
-  opacity: ${({ isFormValid }) => (isFormValid ? 1 : 0.5)};
+  cursor: ${({  $isFormValid }) => ($isFormValid ? "pointer" : "not-allowed")};
+  background-color: ${({ theme, $isFormValid}) =>
+    $isFormValid ? theme.colors.blue500 : "#ddd"};
+  opacity: ${({ $isFormValid }) => ($isFormValid ? 1 : 0.5)};
 `;
 
 export const RatingContainer = styled.div`

@@ -72,9 +72,9 @@ const Register = () => {
           <S.ImagePreview src={imagePreview} alt="이미지 미리보기" />
         )}
 
-        <S.SubmitButton type="submit" isFormValid={isFormValid}>
+      <S.SubmitButton $isFormValid={isFormValid}>
           게시물 등록
-        </S.SubmitButton>
+      </S.SubmitButton>
       </S.FormContainer>
     </S.PageContainer>
   );
