@@ -68,7 +68,7 @@ const EditPost = () => {
           onChange={handleImageChange}
         />
 
-        <S.SubmitButton type="submit" isFormValid={isFormValid}>
+        <S.SubmitButton type="submit" $isFormValid={isFormValid}>
           수정하기
         </S.SubmitButton>
       </S.FormContainer>

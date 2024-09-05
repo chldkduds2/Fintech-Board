@@ -64,7 +64,7 @@ export const Hashtags = styled.div`
 `;
 
 export const Hashtag = styled.span`
-  background: #f1f1f1;
+  background: #${({ theme }) => theme.colors.white100};
   padding: 8px 12px;
   border-radius: 20px;
   font-size: 0.9rem;

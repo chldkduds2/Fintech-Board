@@ -9,7 +9,6 @@ const PostDetail = () => {
 
   if (loading) return <S.Loading>로딩 중...</S.Loading>;
   if (error) return <S.Error>{error}</S.Error>;
-
   if (!post) return <S.NoPost>게시물이 없습니다.</S.NoPost>;
 
   const rating = Number(post.rating);
