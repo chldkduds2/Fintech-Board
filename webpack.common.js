@@ -53,5 +53,5 @@ module.exports = {
   output: {
     filename: "[name].[contenthash].js", // 파일 이름에 해시 추가
     path: path.resolve(__dirname, "dist"),
-  }
+  },
 };
