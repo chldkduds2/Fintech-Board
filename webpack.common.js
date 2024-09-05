@@ -1,63 +1,57 @@
-// [ 개발과 생산 환경에서 공통으로 사용하는 설정 포함 ]
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const webpack = require("webpack");
 const dotenv = require("dotenv");
 
 dotenv.config();
 
 module.exports = {
-  entry: "./src/index.tsx", //엔트리 포인트 설정
+  entry: {
+    main: "./src/index.tsx",
+    vendor: ["react", "react-dom"], // 외부 라이브러리 분리
+  },
   module: {
     rules: [
       {
         test: /\.(js|jsx|ts|tsx)$/,
-        loader: "esbuild-loader", // JavaScript, TypeScript 파일 처리
-        options: {
-          target: "esnext",
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
         },
       },
       {
-        test: /\.(png|jpg|gif|mp4|jpeg|ico)$/, // 이미지 및 미디어 파일 처리
+        test: /\.(png|jpg|gif|mp4|jpeg|ico)$/,
         type: "asset",
       },
       {
-        test: /\.svg$/, // SVG 파일을 React 컴포넌트로 변환
+        test: /\.svg$/,
         use: ["@svgr/webpack"],
       },
       {
-        test: /\.css$/, // CSS 파일 처리
-        use: [
-          "style-loader",
-          "css-loader",
-          {
-            loader: "esbuild-loader",
-            options: {
-              loader: "css",
-              minify: true,
-            },
-          },
-        ],
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(), // 이전 번들 파일 삭제
     new HtmlWebpackPlugin({
-      template: "./public/index.html", // HTML 템플릿 파일
+      template: "./public/index.html",
       filename: "index.html",
     }),
     new webpack.DefinePlugin({
-      "process.env": JSON.stringify(process.env), // 환경 변수를 전역에서 사용 가능하도록 설정
+      "process.env": JSON.stringify(process.env),
     }),
   ],
   resolve: {
-    extensions: [".js", ".ts", ".jsx", ".tsx"], // 파일 확장자 설정
+    extensions: [".js", ".ts", ".jsx", ".tsx"],
     alias: {
-      "@": path.resolve(__dirname, "./src"), // '@'를 './src'로 매핑
+      "@": path.resolve(__dirname, "./src"),
     },
   },
   output: {
-    filename: "bundle.js", // 번들 파일 이름
-    path: path.resolve(__dirname, "dist"), // 출력 경로
-  },
+    filename: "[name].[contenthash].js", // 파일 이름에 해시 추가
+    path: path.resolve(__dirname, "dist"),
+  }
 };

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import useKakaoAuth from "@/hooks/kaKaoAuth/useKaKaoAuth";
+import useKakaoAuth from "@/hooks/KaKaoAuth/useKaKaoAuth";
 import FindaLogoImg from "@/assets/findaLogoImg.svg";
 import * as S from "./style";
 
@@ -101,7 +101,9 @@ const NavBar = () => {
 
         <S.NavbarRight>
           {userNickname ? (
-            <S.NavbarItem>{userNickname} 님</S.NavbarItem>
+            <Link to={"/myInfo"}>
+              <S.NavbarItem>{userNickname} 님</S.NavbarItem>
+            </Link>
           ) : (
             renderItems(
               filteredNavBarItems.filter((item) => item.isAuth),

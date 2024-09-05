@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import axios from "axios";
 import { RegisterContentsFormData } from "@/types/Register/register.type";
-import useKakaoAuth from "@/hooks/kaKaoAuth/useKaKaoAuth";
+import useKakaoAuth from "@/hooks/KaKaoAuth/useKaKaoAuth";
 import { useNavigate } from "react-router-dom";
 
 const useRegisterForm = () => {

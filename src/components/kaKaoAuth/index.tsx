@@ -1,5 +1,5 @@
 import React from "react";
-import useKakao from "@/hooks/kaKaoAuth/useKaKaoAuth";
+import useKakao from "@/hooks/KaKaoAuth/useKaKaoAuth";
 import KakaoLoginImg from "@/assets/kakaoLoginImg.svg";
 import * as S from "./style";
 

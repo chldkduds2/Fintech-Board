@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import useKakaoAuth from "@/hooks/kaKaoAuth/useKaKaoAuth";
+import useKakaoAuth from "@/hooks/KaKaoAuth/useKaKaoAuth";
 import axios from "axios";
 import { Post } from "@/types/Home/PostsContainer/postContainer.type";
 

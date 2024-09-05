@@ -7,7 +7,7 @@ module.exports = merge(common, {
   mode: "development", // 개발 모드 설정
   devtool: "inline-source-map", // 소스맵 설정
   devServer: {
-    port: 3000, // 개발 서버 포트
+    port: 9000, // 개발 서버 포트
     hot: true, // 핫 모듈 교체 활성화
     historyApiFallback: true, // HTML5 History API를 사용하는 SPA 지원
   },
