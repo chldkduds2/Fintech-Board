@@ -1,79 +1,20 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { KakaoUserInfo } from "@/types/KakaoAuth/kakaoAuth.type";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store/Reducers';
+import { fetchUserRequest, loginRequest } from '@/store/Actions/KakaoAuthActions';
 
-const initializeKakao = () => {
-  if (window.Kakao && !window.Kakao.isInitialized()) {
-    window.Kakao.init("8bb71a4823f207ddcab5434be6907da0");
-  }
-};
-
-const useKakao = () => {
-  const [user, setUser] = useState<KakaoUserInfo | null>(null);
-  const [userNickname, setUserNickname] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(true);
-  const navigate = useNavigate();
+const useKakaoAuth = () => {
+  const dispatch = useDispatch();
+  const { user, userNickname, loading, error } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    initializeKakao();
-
-    const fetchUser = () => {
-      if (window.Kakao.Auth.getAccessToken()) {
-        window.Kakao.API.request({
-          url: "/v2/user/me",
-          success: function (res: KakaoUserInfo) {
-            setUser(res);
-            setLoading(false);
-          },
-          fail: function (error: any) {
-            console.error("API 요청 실패", error);
-            setLoading(false);
-          },
-        });
-      } else {
-        setLoading(false);
-      }
-    };
-
-    fetchUser();
-  }, []);
-
-  useEffect(() => {
-    if (user) {
-      setUserNickname(
-        user?.kakao_account?.profile?.nickname ||
-          user?.properties?.nickname ||
-          ""
-      );
-    }
-  }, [user]);
-
+    dispatch(fetchUserRequest());
+  }, [dispatch]);
   const handleLogin = () => {
-    if (window.Kakao) {
-      window.Kakao.Auth.login({
-        success: function (authObj: any) {
-          console.log("카카오 로그인 성공", authObj);
-          window.Kakao.API.request({
-            url: "/v2/user/me",
-            success: function (res: KakaoUserInfo) {
-              setUser(res);
-              console.log("사용자 정보", res);
-              navigate("/");
-              window.location.reload();
-            },
-            fail: function (error: any) {
-              console.error("API 요청 실패", error);
-            },
-          });
-        },
-        fail: function (err: any) {
-          console.error("카카오 로그인 실패", err);
-        },
-      });
-    }
+    dispatch(loginRequest());
   };
 
-  return { handleLogin, user, userNickname, loading };
+  return { handleLogin, user, userNickname, loading, error };
 };
 
-export default useKakao;
+export default useKakaoAuth;

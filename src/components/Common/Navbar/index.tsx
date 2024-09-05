@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useKakaoAuth from "@/hooks/KaKaoAuth/useKaKaoAuth";
 import FindaLogoImg from "@/assets/findaLogoImg.svg";
@@ -45,7 +44,7 @@ const NavBarItems = [
 ];
 
 const NavBar = () => {
-  const { userNickname, loading } = useKakaoAuth();
+  const { userNickname, loading: authLoading } = useKakaoAuth();
 
   const filteredNavBarItems = NavBarItems.filter((item) => {
     if (item.showIfLoggedIn !== undefined) {
@@ -64,6 +63,7 @@ const NavBar = () => {
       </React.Fragment>
     ));
 
+
   return (
     <S.NavbarContainer>
       <S.NavbarContants>
@@ -80,7 +80,7 @@ const NavBar = () => {
         <S.NavbarRight>
           {userNickname ? (
             <Link to={"/"}>
-            <S.NavbarItem>{userNickname} 님</S.NavbarItem>
+              <S.NavbarItem>{userNickname} 님</S.NavbarItem>
             </Link>
           ) : (
             renderItems(
