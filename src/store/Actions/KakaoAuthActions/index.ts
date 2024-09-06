@@ -1,74 +1,46 @@
-import {  KakaoUserInfo } from "@/types/KakaoAuth/kakaoAuth.type"
+import { KakaoUserInfo } from '@/types/KakaoAuth/kakaoAuth.type';
 
-export enum KakaoAuthActionTypes {
-  FETCH_USER_REQUEST = 'FETCH_USER_REQUEST',
-  FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS',
-  FETCH_USER_FAILURE = 'FETCH_USER_FAILURE',
-  LOGIN_REQUEST = 'LOGIN_REQUEST',
-  LOGIN_SUCCESS = 'LOGIN_SUCCESS',
-  LOGIN_FAILURE = 'LOGIN_FAILURE',
-}
+import {
+  FETCH_USER_REQUEST,
+  FETCH_USER_SUCCESS,
+  FETCH_USER_FAILURE,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+} from '@/types/KakaoAuth/KaKaoAuthActions/kakaoAuthActons.type';
+import{ KakaoAuthAction} from '@/types/KakaoAuth/KaKaoAuthActions/kakaoAuthActons.type';
 
-interface FetchUserRequestAction {
-  type: KakaoAuthActionTypes.FETCH_USER_REQUEST;
-}
-
-interface FetchUserSuccessAction {
-  type: KakaoAuthActionTypes.FETCH_USER_SUCCESS;
-  payload: KakaoUserInfo;
-}
-
-interface FetchUserFailureAction {
-  type: KakaoAuthActionTypes.FETCH_USER_FAILURE;
-  payload: string;
-}
-
-interface LoginRequestAction {
-  type: KakaoAuthActionTypes.LOGIN_REQUEST;
-}
-
-interface LoginSuccessAction {
-  type: KakaoAuthActionTypes.LOGIN_SUCCESS;
-  payload: KakaoUserInfo;
-}
-
-interface LoginFailureAction {
-  type: KakaoAuthActionTypes.LOGIN_FAILURE;
-  payload: string;
-}
-
-export type KakaoAuthAction =
-  | FetchUserRequestAction
-  | FetchUserSuccessAction
-  | FetchUserFailureAction
-  | LoginRequestAction
-  | LoginSuccessAction
-  | LoginFailureAction;
-
+// [ 사용자 정보 요청 액션 생성자 ]
 export const fetchUserRequest = (): KakaoAuthAction => ({
-  type: KakaoAuthActionTypes.FETCH_USER_REQUEST,
+  type: FETCH_USER_REQUEST,
 });
 
+// [ 사용자 정보 가져오기 성공 액션 생성자 ]
 export const fetchUserSuccess = (user: KakaoUserInfo): KakaoAuthAction => ({
-  type: KakaoAuthActionTypes.FETCH_USER_SUCCESS,
+  type: FETCH_USER_SUCCESS,
   payload: user,
 });
 
+// [ 사용자 정보 가져오기 실패 액션 생성자 ]
 export const fetchUserFailure = (error: string): KakaoAuthAction => ({
-  type: KakaoAuthActionTypes.FETCH_USER_FAILURE,
+  type: FETCH_USER_FAILURE,
   payload: error,
 });
 
-export const loginRequest = (): KakaoAuthAction => ({
-  type: KakaoAuthActionTypes.LOGIN_REQUEST,
+// [ 로그인 요청 액션 생성자 ]
+export const loginRequest = (navigate: (path: string) => void): KakaoAuthAction => ({
+  type: LOGIN_REQUEST,
+  payload: { navigate },
 });
 
+// [ 로그인 성공 액션 생성자 ]
 export const loginSuccess = (user: KakaoUserInfo): KakaoAuthAction => ({
-  type: KakaoAuthActionTypes.LOGIN_SUCCESS,
+  type: LOGIN_SUCCESS,
   payload: user,
 });
 
+// [ 로그인 실패 액션 생성자 ]
 export const loginFailure = (error: string): KakaoAuthAction => ({
-  type: KakaoAuthActionTypes.LOGIN_FAILURE,
+  type: LOGIN_FAILURE,
   payload: error,
 });

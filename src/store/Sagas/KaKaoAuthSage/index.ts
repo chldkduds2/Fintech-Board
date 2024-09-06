@@ -1,16 +1,17 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import {
-  KakaoAuthActionTypes,
   fetchUserSuccess,
   fetchUserFailure,
   loginSuccess,
   loginFailure,
-} from '../../Actions/KakaoAuthActions';
+} from '@/store/Actions/KakaoAuthActions';
+import {
+  FETCH_USER_REQUEST,
+  LOGIN_REQUEST,
+} from '@/types/KakaoAuth/KaKaoAuthActions/kakaoAuthActons.type';
 import { KakaoUserInfo } from '@/types/KakaoAuth/kakaoAuth.type';
-import { useNavigate } from 'react-router-dom';
 
 const initializeKakao = () => {
-  
   if (window.Kakao && !window.Kakao.isInitialized()) {
     window.Kakao.init("8bb71a4823f207ddcab5434be6907da0");
   }
@@ -34,12 +35,12 @@ function* fetchUserSaga() {
       yield put(fetchUserFailure("No access token"));
     }
   } catch (error) {
-    yield put(fetchUserFailure((error as any).message));
+    yield put(fetchUserFailure((error as Error).message));
   }
 }
 
-function* loginSaga() {
-  const navigate = useNavigate();
+function* loginSaga(action: { type: string; payload: { navigate: (path: string) => void } }) {
+  const { navigate } = action.payload;
   try {
     initializeKakao();
     const response: KakaoUserInfo = yield call(() =>
@@ -60,11 +61,15 @@ function* loginSaga() {
     navigate("/");
     window.location.reload();
   } catch (error) {
-    yield put(fetchUserFailure((error as any).message));
+    if (error instanceof Error) {
+      yield put(loginFailure(error.message));
+    } else {
+      yield put(loginFailure("An unknown error occurred"));
+    }
   }
 }
 
 export default function* kakaoAuthSaga() {
-  yield takeLatest(KakaoAuthActionTypes.FETCH_USER_REQUEST, fetchUserSaga);
-  yield takeLatest(KakaoAuthActionTypes.LOGIN_REQUEST, loginSaga);
+  yield takeLatest(FETCH_USER_REQUEST, fetchUserSaga);
+  yield takeLatest(LOGIN_REQUEST, loginSaga);
 }
