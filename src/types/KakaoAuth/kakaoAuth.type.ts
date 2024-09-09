@@ -10,3 +10,11 @@ export interface KakaoUserInfo {
     [key: string]: any;
   };
 }
+
+
+export interface KakaoAuthState {
+  user: KakaoUserInfo | null;
+  userNickname: string;
+  loading: boolean;
+  error: string | null;
+}
