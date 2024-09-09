@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Post } from "@/types/Home/PostsContainer/postContainer.type";
+import { Post } from "@/types/Home/PostsContainer/postsContainer.type";
 
 
 const usePostSorting = (posts: Post[], searchTerm: string) => {
