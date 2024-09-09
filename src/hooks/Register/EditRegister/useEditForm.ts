@@ -10,24 +10,28 @@ const useEditPostForm = (postId: number) => {
     rating: 0,
     image: null,
   });
+  const [originalData, setOriginalData] = useState<EditFormData | null>(null); // 원본 데이터를 저장할 상태
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isFormValid, setIsFormValid] = useState(false);
   const navigate = useNavigate();
+
+  const apiBaseUEL = process.env.REACT_APP_API_BASE_URL;
+
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:8080/api/posts/post/${postId}`
-        );
+        const response = await fetch(`${apiBaseUEL}/api/posts/post/${postId}`);
         const post = await response.json();
-        setFormData({
+        const postData = {
           title: post.title,
           content: post.content,
           hashtags: post.hashtags.join(","),
           rating: post.rating,
           image: post.image,
-        });
-        setImagePreview(`http://localhost:8080/uploads/${post.image}`);
+        };
+        setFormData(postData);
+        setOriginalData(postData); // 원본 데이터를 저장
+        setImagePreview(`${apiBaseUEL}/uploads/${post.image}`);
       } catch (error) {
         console.error("Failed to fetch post data:", error);
       }
@@ -67,16 +71,22 @@ const useEditPostForm = (postId: number) => {
     e.preventDefault();
     try {
       const formDataObj = new FormData();
-      formDataObj.append("title", formData.title);
-      formDataObj.append("content", formData.content);
-      formDataObj.append("hashtags", formData.hashtags);
-      formDataObj.append("rating", formData.rating.toString());
+      
+      // 필드별로 값이 변경되지 않았다면 원본 데이터를 사용
+      formDataObj.append("title", formData.title || originalData?.title || "");
+      formDataObj.append("content", formData.content || originalData?.content || "");
+      formDataObj.append("hashtags", formData.hashtags || originalData?.hashtags || "");
+      formDataObj.append("rating", (formData.rating || originalData?.rating)?.toString() || "0");
+      
+      // 이미지가 변경되지 않았다면 원본 이미지 파일 이름만 전송
       if (formData.image) {
         formDataObj.append("image", formData.image);
+      } else if (originalData?.image) {
+        formDataObj.append("existingImage", originalData.image); // 기존 이미지를 보냄
       }
 
       const response = await fetch(
-        `http://localhost:8080/api/posts/${postId}`,
+        `${apiBaseUEL}/api/posts/${postId}`,
         {
           method: "PUT",
           body: formDataObj,

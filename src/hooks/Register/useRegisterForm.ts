@@ -29,6 +29,8 @@ const useRegisterForm = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isFormValid, setIsFormValid] = useState(false);
 
+  const apiBaseUEL = process.env.REACT_APP_API_BASE_URL;
+
   useEffect(() => {
     setFormData((prevData) => ({
       ...prevData,
@@ -77,7 +79,7 @@ const useRegisterForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/posts",
+        `${apiBaseUEL}/api/posts`,
         form,
         {
           headers: {

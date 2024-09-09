@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '@/store/Reducers';
 import { fetchUserRequest, loginRequest } from '@/store/Actions/KakaoAuthActions';
-import { KakaoAuthAction } from "@/types/KakaoAuth/KaKaoAuthActions/kakaoAuthActons.type" // 액션 타입을 가져옵니다.
 import { ThunkDispatch } from 'redux-thunk'; // ThunkDispatch를 가져옵니다.
 import { AnyAction } from 'redux'; // AnyAction을 가져옵니다.
 

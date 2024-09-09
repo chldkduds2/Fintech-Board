@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import useKakaoAuth from "@/hooks/KaKaoAuth/useKaKaoAuth";
 import axios from "axios";
-import { Post } from "@/types/Home/PostsContainer/postContainer.type";
+import { Post } from "@/types/Home/PostsContainer/postsContainer.type";
 
 export const useMyInfo = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -9,6 +9,7 @@ export const useMyInfo = () => {
   const [error, setError] = useState<string | null>(null);
 
   const { userNickname } = useKakaoAuth();
+  const apiBaseUEL = process.env.REACT_APP_API_BASE_URL;
 
   const fetchPosts = useCallback(async () => {
     if (!userNickname) return;
@@ -16,7 +17,7 @@ export const useMyInfo = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/posts/author/${encodeURIComponent(
+        `${apiBaseUEL}/api/posts/author/${encodeURIComponent(
           userNickname
         )}`
       );
@@ -33,8 +34,9 @@ export const useMyInfo = () => {
   }, [fetchPosts]);
 
   const deletePost = async (postId: number) => {
+
     try {
-      await axios.delete(`http://localhost:8080/api/posts/${postId}`);
+      await axios.delete(`${apiBaseUEL}/api/posts/${postId}`);
 
       fetchPosts();
       alert("게시물이 삭제되었습니다.");
