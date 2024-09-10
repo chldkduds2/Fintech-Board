@@ -1,14 +1,15 @@
 import { useState, useEffect, useCallback } from "react";
-import useKakaoAuth from "@/hooks/KaKaoAuth/useKaKaoAuth";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { Post } from "@/types/Home/PostsContainer/postsContainer.type";
+import { selectKakaoUserNickname } from "@/store/Selectors/KaKaoAuthSelector";
 
 export const useMyInfo = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const { userNickname } = useKakaoAuth();
+  const userNickname = useSelector(selectKakaoUserNickname);
   const apiBaseUEL = process.env.REACT_APP_API_BASE_URL;
 
   const fetchPosts = useCallback(async () => {
@@ -27,7 +28,7 @@ export const useMyInfo = () => {
     } finally {
       setLoading(false);
     }
-  }, [userNickname]);
+  }, [userNickname, apiBaseUEL]);
 
   useEffect(() => {
     fetchPosts();

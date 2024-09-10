@@ -3,13 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '@/store/Reducers';
 import { fetchUserRequest, loginRequest } from '@/store/Actions/KakaoAuthActions';
-import { ThunkDispatch } from 'redux-thunk'; // ThunkDispatch를 가져옵니다.
-import { AnyAction } from 'redux'; // AnyAction을 가져옵니다.
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux'; 
+import { selectKakaoUser, selectKakaoUserNickname, selectKakaoAuthLoading, selectKakaoAuthError } from '@/store/Selectors/KaKaoAuthSelector';
 
 const useKakaoAuth = () => {
-  const dispatch = useDispatch<ThunkDispatch<RootState, void, AnyAction>>(); // dispatch 함수의 타입을 명확히 정의합니다.
+  const dispatch = useDispatch<ThunkDispatch<RootState, void, AnyAction>>();
   const navigate = useNavigate();
-  const { user, userNickname, loading, error } = useSelector((state: RootState) => state.user);
+  const user = useSelector(selectKakaoUser);
+  const userNickname = useSelector(selectKakaoUserNickname);
+  const loading = useSelector(selectKakaoAuthLoading);
+  const error = useSelector(selectKakaoAuthError);
 
   useEffect(() => {
     dispatch(fetchUserRequest());
