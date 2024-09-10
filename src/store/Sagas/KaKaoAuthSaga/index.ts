@@ -11,8 +11,11 @@ import {
 import { KakaoUserInfo } from '@/types/KakaoAuth/kakaoAuth.type';
 
 const initializeKakao = () => {
+
+   const kakaoAPIkey = process.env.REACT_APP_KAKAO_API_KEY;
+
   if (window.Kakao && !window.Kakao.isInitialized()) {
-    window.Kakao.init("8bb71a4823f207ddcab5434be6907da0");
+    window.Kakao.init(kakaoAPIkey);
   }
 };
 

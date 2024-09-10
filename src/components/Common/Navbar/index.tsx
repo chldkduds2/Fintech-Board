@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useSelector } from "react-redux";
 import useKakaoAuth from "@/hooks/KaKaoAuth/useKaKaoAuth";
 import FindaLogoImg from "@/assets/findaLogoImg.svg";
 import * as S from "./style";
+import { RootState } from '@/store/Reducers';
+import { selectKakaoAuthLoading } from '@/store/Selectors/KaKaoAuthSelector';
 
 const NavBarItems = [
   {
@@ -44,7 +47,10 @@ const NavBarItems = [
 ];
 
 const NavBar = () => {
-  const { userNickname, loading: authLoading } = useKakaoAuth();
+  
+  const { userNickname } = useKakaoAuth();
+  const loading = useSelector((state: RootState) => selectKakaoAuthLoading(state));
+  
 
   const filteredNavBarItems = NavBarItems.filter((item) => {
     if (item.showIfLoggedIn !== undefined) {

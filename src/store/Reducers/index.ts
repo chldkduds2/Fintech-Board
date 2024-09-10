@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
-import KakaoAuthReduce from './KakaoAuthReducer';
-
+import kakaoAuthReducer from '../Reducers/KakaoAuthReducer';
 
 const rootReducer = combineReducers({
-  user: KakaoAuthReduce,
+  kakaoAuth: kakaoAuthReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
-
 export default rootReducer;
